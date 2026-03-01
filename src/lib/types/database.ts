@@ -29,7 +29,7 @@ export interface SqlChallenge {
   slug: string
   title: string
   difficulty: 'easy' | 'medium' | 'hard'
-  category: 'select' | 'filtering' | 'joins' | 'aggregate' | 'subquery' | 'window' | 'cte' | 'analytics'
+  category: 'select' | 'filtering' | 'joins' | 'aggregate' | 'subquery' | 'window' | 'cte' | 'analytics' | 'string' | 'datetime' | 'nulls' | 'case' | 'set_ops'
   description: string
   description_th: string
   table_schema: string

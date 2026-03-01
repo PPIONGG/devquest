@@ -10,7 +10,8 @@ function getPool(): Pool {
       connectionString: process.env.SUPABASE_DB_DIRECT_URL,
       max: 5,
       idleTimeoutMillis: 30000,
-      connectionTimeoutMillis: 5000,
+      connectionTimeoutMillis: 10000,
+      ssl: { rejectUnauthorized: false },
     })
   }
   return _pool

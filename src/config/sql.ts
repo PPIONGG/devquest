@@ -12,7 +12,12 @@ export function getDifficultyConfig(value: string) {
 
 export const challengeCategories = [
   { value: 'select', label: 'SELECT Basics' },
+  { value: 'string', label: 'String Functions' },
+  { value: 'nulls', label: 'NULL Handling' },
+  { value: 'datetime', label: 'Date & Time' },
+  { value: 'case', label: 'CASE WHEN' },
   { value: 'filtering', label: 'WHERE & Filtering' },
+  { value: 'set_ops', label: 'Set Operations' },
   { value: 'joins', label: 'JOINs' },
   { value: 'aggregate', label: 'Aggregation' },
   { value: 'subquery', label: 'Subqueries' },
