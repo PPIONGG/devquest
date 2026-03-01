@@ -126,10 +126,22 @@ export async function executeAndJudge({
 
   try {
     await client.query('BEGIN')
-    await client.query("SET statement_timeout = '5000'")
+    await client.query("SET LOCAL statement_timeout = '5000'")
     await client.query("SET LOCAL timezone = 'UTC'")
-    await client.query(tableSchema)
-    await client.query(seedData)
+
+    try {
+      await client.query(tableSchema)
+    } catch (err) {
+      await client.query('ROLLBACK')
+      return { status: 'error', error_message: `Schema error: ${sanitizeError(err)}`, execution_time_ms: 0 }
+    }
+
+    try {
+      await client.query(seedData)
+    } catch (err) {
+      await client.query('ROLLBACK')
+      return { status: 'error', error_message: `Seed error: ${sanitizeError(err)}`, execution_time_ms: 0 }
+    }
 
     const start = Date.now()
     let userResult: QueryResult
@@ -193,7 +205,7 @@ export async function runExplainAnalyze({
 
   try {
     await client.query('BEGIN')
-    await client.query("SET statement_timeout = '5000'")
+    await client.query("SET LOCAL statement_timeout = '5000'")
     await client.query(tableSchema)
     await client.query(seedData)
 
@@ -220,7 +232,7 @@ export async function previewTable({
 
   try {
     await client.query('BEGIN')
-    await client.query("SET statement_timeout = '5000'")
+    await client.query("SET LOCAL statement_timeout = '5000'")
     await client.query(tableSchema)
     await client.query(seedData)
 
